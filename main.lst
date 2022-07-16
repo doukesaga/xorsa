@@ -1,0 +1,1112 @@
+     1                                  %include "./functions64.inc"						;library
+     2                              <1> ;
+     3                              <1> ;Include file for the functions library
+     4                              <1> ;
+     5                              <1> 
+     6                              <1> %macro  PUSHREGS 0
+     7                              <1>         push	rax
+     8                              <1>         push	rbx
+     9                              <1>         push	rcx
+    10                              <1>         push	rdx
+    11                              <1> 		push	rsi
+    12                              <1> 		push	rdi
+    13                              <1> 		push	r8
+    14                              <1> 		push	r9
+    15                              <1> 		push	r10
+    16                              <1> 		push	r11
+    17                              <1> 		push	r12
+    18                              <1> 		push	r13
+    19                              <1> 		push	r14
+    20                              <1> 		push	r15
+    21                              <1> %endmacro
+    22                              <1> 
+    23                              <1> %macro  POPREGS 0
+    24                              <1> 		pop		r15
+    25                              <1> 		pop		r14
+    26                              <1> 		pop		r13
+    27                              <1> 		pop		r12
+    28                              <1> 		pop		r11
+    29                              <1> 		pop		r10
+    30                              <1> 		pop		r9
+    31                              <1> 		pop		r8
+    32                              <1>         pop		rdi
+    33                              <1>         pop		rsi
+    34                              <1>         pop		rdx
+    35                              <1>         pop		rcx
+    36                              <1> 		pop		rbx
+    37                              <1> 		pop		rax
+    38                              <1> %endmacro
+    39                              <1> 
+    40                              <1> 
+    41                              <1> ;Print the data for a current function/procedure's stack frame
+    42                              <1> ;Notes:
+    43                              <1> ;	This function assumes you have created a valid stack frame
+    44                              <1> ;	Call this function after the stack frame is created an all
+    45                              <1> ;	local function variables have been allocated and before you use
+    46                              <1> ;	the stack for any other purposes
+    47                              <1> ;Stack contents:
+    48                              <1> ;	None
+    49                              <1> ;Example Usage:
+    50                              <1> ;	call	PrintStackFrame
+    51                              <1> ;
+    52                              <1> extern		PrintStackFrame
+    53                              <1> 
+    54                              <1> ;Print a tab character to stdout
+    55                              <1> ;Stack contents:
+    56                              <1> ;	None
+    57                              <1> ;Example Usage:
+    58                              <1> ;	call	PrintTab
+    59                              <1> ;
+    60                              <1> extern		PrintTab
+    61                              <1> 
+    62                              <1> ;Print all Quad Word values found in an array
+    63                              <1> ;Stack Contents:	
+    64                              <1> ;	Address of the Array (Stack)
+    65                              <1> ;	Number of items in the array
+    66                              <1> ;Example Usage:
+    67                              <1> ;	push	ArrayToPrint
+    68                              <1> ;	push	NumerOfEntriesInArray
+    69                              <1> ;	call	PrintQWordArray
+    70                              <1> extern		PrintQWordArray
+    71                              <1> 
+    72                              <1> ;Print all Quad Word values found in an array in Decimal Format
+    73                              <1> ;Stack Contents:	
+    74                              <1> ;	Address of the Array (Stack)
+    75                              <1> ;	Number of items in the array
+    76                              <1> ;Example Usage:
+    77                              <1> ;	push	ArrayToPrint
+    78                              <1> ;	push	NumerOfEntriesInArray
+    79                              <1> ;	call	PrintQWordArrayDec
+    80                              <1> extern		PrintQWordArrayDec
+    81                              <1> 
+    82                              <1> ;Print all Quad Word signed values found in an array in Decimal Format
+    83                              <1> ;Stack Contents:	
+    84                              <1> ;	Address of the Array
+    85                              <1> ;	Number of items in the array
+    86                              <1> ;Example Usage:
+    87                              <1> ;	push	ArrayToPrint
+    88                              <1> ;	push	NumerOfEntriesInArray
+    89                              <1> ;	call	PrintSQWordArrayDec
+    90                              <1> extern		PrintSQWordArrayDec
+    91                              <1> 
+    92                              <1> ;Print all byte values found in an array in Hex format
+    93                              <1> ;Stack Contents:	
+    94                              <1> ;	Address of the Array
+    95                              <1> ;	Number of items in the array
+    96                              <1> ;Example Usage:
+    97                              <1> ;	push	ArrayToPrint
+    98                              <1> ;	push	NumerOfEntriesInArray
+    99                              <1> ;	call	PrintByteArray
+   100                              <1> extern		PrintByteArray
+   101                              <1> 
+   102                              <1> ;Print all byte values found in an array in Decimal format
+   103                              <1> ;Stack Contents:	
+   104                              <1> ;	Address of the Array
+   105                              <1> ;	Number of items in the array
+   106                              <1> ;Example Usage:
+   107                              <1> ;	push	ArrayToPrint
+   108                              <1> ;	push	NumerOfEntriesInArray
+   109                              <1> ;	call	PrintByteArrayDec
+   110                              <1> extern		PrintByteArrayDec
+   111                              <1> 
+   112                              <1> ;Print all signed byte values found in an array in Decimal format
+   113                              <1> ;Stack Contents:	
+   114                              <1> ;	Address of the Array
+   115                              <1> ;	Number of items in the array
+   116                              <1> ;Example Usage:
+   117                              <1> ;	push	ArrayToPrint
+   118                              <1> ;	push	NumerOfEntriesInArray
+   119                              <1> ;	call	PrintSByteArrayDec
+   120                              <1> extern		PrintSByteArrayDec
+   121                              <1> 
+   122                              <1> ;Print all word values found in an array in Hex format
+   123                              <1> ;Stack Contents:	
+   124                              <1> ;	Address of the Array
+   125                              <1> ;	Number of items in the array
+   126                              <1> ;Example Usage:
+   127                              <1> ;	push	ArrayToPrint
+   128                              <1> ;	push	NumerOfEntriesInArray
+   129                              <1> ;	call	PrintWordArray
+   130                              <1> extern		PrintWordArray
+   131                              <1> 
+   132                              <1> ;Print all word values found in an array in Decimal format
+   133                              <1> ;Stack Contents:	
+   134                              <1> ;	Address of the Array
+   135                              <1> ;	Number of items in the array
+   136                              <1> ;Example Usage:
+   137                              <1> ;	push	ArrayToPrint
+   138                              <1> ;	push	NumerOfEntriesInArray
+   139                              <1> ;	call	PrintWordArrayDec
+   140                              <1> extern		PrintWordArrayDec
+   141                              <1> 
+   142                              <1> ;Print all signed word values found in an array in Decimal format
+   143                              <1> ;Stack Contents:	
+   144                              <1> ;	Address of the Array
+   145                              <1> ;	Number of items in the array
+   146                              <1> ;Example Usage:
+   147                              <1> ;	push	ArrayToPrint
+   148                              <1> ;	push	NumerOfEntriesInArray
+   149                              <1> ;	call	PrintSWordArrayDec
+   150                              <1> extern		PrintSWordArrayDec
+   151                              <1> 
+   152                              <1> ;Print all Double Word values found in an array in Hex format
+   153                              <1> ;Stack Contents:	
+   154                              <1> ;	Address of the Array
+   155                              <1> ;	Number of items in the array
+   156                              <1> ;Example Usage:
+   157                              <1> ;	push	ArrayToPrint
+   158                              <1> ;	push	NumerOfEntriesInArray
+   159                              <1> ;	call	PrintDWordArray
+   160                              <1> extern		PrintDWordArray
+   161                              <1> 
+   162                              <1> ;Print all Double Word values found in an array in Decimal format
+   163                              <1> ;Stack Contents:	
+   164                              <1> ;	Address of the Array
+   165                              <1> ;	Number of items in the array
+   166                              <1> ;Example Usage:
+   167                              <1> ;	push	ArrayToPrint
+   168                              <1> ;	push	NumerOfEntriesInArray
+   169                              <1> ;	call	PrintDWordArrayDec
+   170                              <1> extern		PrintDWordArrayDec
+   171                              <1> 
+   172                              <1> ;Print all signed Double Word values found in an array in Decimal format
+   173                              <1> ;Stack Contents:	
+   174                              <1> ;	Address of the Array (Stack)
+   175                              <1> ;	Number of items in the array
+   176                              <1> ;Example Usage:
+   177                              <1> ;	push	ArrayToPrint
+   178                              <1> ;	push	NumerOfEntriesInArray
+   179                              <1> ;	call	PrintSDWordArrayDec
+   180                              <1> extern		PrintSDWordArrayDec
+   181                              <1> 
+   182                              <1> ;Print a string with an ending 00h delimiter to the console
+   183                              <1> ;Stack Contents:
+   184                              <1> ;	Address of the String (Stack)
+   185                              <1> ;Example Usage:
+   186                              <1> ;	push	stringVariable
+   187                              <1> ;	call	PrintString
+   188                              <1> extern		PrintString
+   189                              <1> 
+   190                              <1> ;Get the length of a null-terminated string.  Can be used for functions
+   191                              <1> ;which need a string length and don't search for null-terminated characters
+   192                              <1> ;Stack Contents:
+   193                              <1> ;	Address of the String (Stack)
+   194                              <1> ;Return Value:
+   195                              <1> ;	RAX will equal the length of the string
+   196                              <1> ;Example Usage:
+   197                              <1> ;	push	stringVariable
+   198                              <1> ;	call	StringLength
+   199                              <1> extern		StringLength
+   200                              <1> 
+   201                              <1> ;Print a space to the console
+   202                              <1> ;Stack Contents:
+   203                              <1> ;	None
+   204                              <1> ;Example Usage:
+   205                              <1> ;	call	PrintSpace
+   206                              <1> extern		PrintSpace
+   207                              <1> 
+   208                              <1> ;Print 'x' number of spaces
+   209                              <1> ;Stack Contents:
+   210                              <1> ;	the total spaces to print
+   211                              <1> ;Example Usage:
+   212                              <1> ;	push	DWORD 5
+   213                              <1> ;	call	PrintSpaces
+   214                              <1> extern		PrintSpaces
+   215                              <1> 
+   216                              <1> ;Print a comma to the console
+   217                              <1> ;Stack Contents:
+   218                              <1> ;	None
+   219                              <1> ;Example Usage:
+   220                              <1> ;	call	PrintComma
+   221                              <1> extern		PrintComma
+   222                              <1> 
+   223                              <1> ;Print a new line to the console
+   224                              <1> ;Stack Contents:
+   225                              <1> ;	None
+   226                              <1> ;Example Usage:
+   227                              <1> ;	call	Printendl
+   228                              <1> extern		Printendl
+   229                              <1> 
+   230                              <1> ;Print a string which is not null terminated
+   231                              <1> ;Stack contents:
+   232                              <1> ;	The Address of the string to print
+   233                              <1> ;	The length of the string to print
+   234                              <1> ;Example Usage:
+   235                              <1> ;	push	stringVariable
+   236                              <1> ;	push	stringVariable.len
+   237                              <1> ;	call	PrintText
+   238                              <1> extern		PrintText
+   239                              <1> 
+   240                              <1> ;Convert and then print a 64bit hex number
+   241                              <1> ;Stack contents:
+   242                              <1> ;	Value to Convert to an Ascii String
+   243                              <1> ;Example Usage:
+   244                              <1> ;	push	QWORD [quadWordVariable]
+   245                              <1> ;	call	Print64bitNumHex
+   246                              <1> extern		Print64bitNumHex
+   247                              <1>    
+   248                              <1> ;Convert and then print a 64bit octal number
+   249                              <1> ;Stack contents:
+   250                              <1> ;	Value to Convert to an Ascii String
+   251                              <1> ;Example Usage:
+   252                              <1> ;	push	QWORD [quadWordVariable]
+   253                              <1> ;	call	Print64bitNumOctal
+   254                              <1> extern		Print64bitNumOctal
+   255                              <1> 
+   256                              <1> ;Convert and then print a 64bit decimal number
+   257                              <1> ;Stack contents:
+   258                              <1> ;	Value to Convert to an Ascii String
+   259                              <1> ;Example Usage:
+   260                              <1> ;	push QWORD [quadwordvariable]
+   261                              <1> ;	call	Print64bitNumDecimal
+   262                              <1> extern		Print64bitNumDecimal
+   263                              <1> 
+   264                              <1> ;Convert and then print a signed 64bit decimal number
+   265                              <1> ;Stack contents:
+   266                              <1> ;	Value to Convert to an Ascii String
+   267                              <1> ;Example Usage:
+   268                              <1> ;	push QWORD [quadwordvariable]
+   269                              <1> ;	call	Print64bitNumDecimal
+   270                              <1> extern		Print64bitSNumDecimal
+   271                              <1> 
+   272                              <1> ;Convert and then print a 64bit binary number
+   273                              <1> ;Stack contents:
+   274                              <1> ;	Value to Convert to an Ascii String
+   275                              <1> ;Example Usage:
+   276                              <1> ;	push QWORD [quadwordvariable]
+   277                              <1> ;	call	Print64bitNumBinary
+   278                              <1> extern		Print64bitNumBinary
+   279                              <1> 
+   280                              <1> ;Print a full 64bit binary number including leading zeros
+   281                              <1> ;Stack contents:
+   282                              <1> ;	Value to Convert to an Ascii String
+   283                              <1> ;Example Usage:
+   284                              <1> ;	push QWORD [quadwordvariable]
+   285                              <1> ;	call	Print64bitFullBinary
+   286                              <1> extern		Print64bitFullBinary
+   287                              <1> 
+   288                              <1> ;This routine prints a string to the screen left justified
+   289                              <1> ;Stack contents:
+   290                              <1> ;	Address of the string [ebp + 16]
+   291                              <1> ;	Number of characters it will be justified within [ebp + 24]
+   292                              <1> ;Example Usage:
+   293                              <1> ;	push	stringVariable
+   294                              <1> ;	push	QWORD 80
+   295                              <1> ;	call	PrintLeft
+   296                              <1> extern		PrintLeft
+   297                              <1> 
+   298                              <1> ;This routine prints a string to the screen right justified
+   299                              <1> ;Stack contents:
+   300                              <1> ;	Address of the string [ebp + 16]
+   301                              <1> ;	Number of characters it will be justified within [ebp + 24]
+   302                              <1> ;Example Usage:
+   303                              <1> ;	push	stringVariable
+   304                              <1> ;	push	QWORD 80
+   305                              <1> ;	call	PrintRight
+   306                              <1> extern		PrintRight
+   307                              <1> 
+   308                              <1> ;This routine prints a string to the screen center justified
+   309                              <1> ;Stack contents:
+   310                              <1> ;	Address of the string [ebp + 16]
+   311                              <1> ;	Number of characters it will be justified within [ebp + 24]
+   312                              <1> ;Example Usage:
+   313                              <1> ;	push	stringVariable
+   314                              <1> ;	push	QWORD 80
+   315                              <1> ;	call	PrintCenter
+   316                              <1> extern		PrintCenter
+   317                              <1> 
+   318                              <1> ;Print all 64bit Registers to the screen
+   319                              <1> ;Stack contents:
+   320                              <1> ;	None
+   321                              <1> ;Example Usage:
+   322                              <1> ;	call	PrintRegisters
+   323                              <1> extern		PrintRegisters
+   324                              <1> 
+   325                              <1> ;Call the necessary interrupt with the necessary register values to read data from the keyboard
+   326                              <1> ;Stack Contents:
+   327                              <1> ;	Address of keyboard buffer
+   328                              <1> ;	Size of the keyboard buffer
+   329                              <1> ;Return:
+   330                              <1> ;	Rax will contain the number of characters the user input
+   331                              <1> ;Example Usage:
+   332                              <1> ;	push	readbuffer
+   333                              <1> ;	push	readbuffer.len
+   334                              <1> ;	call	ReadText
+   335                              <1> extern		ReadText
+   336                              <1> 
+   337                              <1> ;Input UnSigned Int 
+   338                              <1> ;This function will let the user input an integer returned into the RAX register
+   339                              <1> ;Arguments: None
+   340                              <1> ;Return: 	rax will contain the usigned ingeter
+   341                              <1> ;			Carry flag will be set if invalid integer was input
+   342                              <1> ;Example Usage:
+   343                              <1> ;	call	InputInt
+   344                              <1> ;	Note: eax will contain the value of the unsigned integer entered
+   345                              <1> ;	jnc		validIntegerInput
+   346                              <1> ;	Otherwise, an invalid integer was input
+   347                              <1> extern		InputUInt
+   348                              <1> 
+   349                              <1> ;Input Signed Int 
+   350                              <1> ;This function will let the user input a signed integer and put the value 
+   351                              <1> ;into the RAX register.
+   352                              <1> ;Arguments: None
+   353                              <1> ;Return: 	eax will contain the usigned ingeter
+   354                              <1> ;			Carry flag will be set if invalid integer was input
+   355                              <1> ;Example Usage:
+   356                              <1> ;	call	InputSInt
+   357                              <1> ;	Note: eax will contain the value of the signed integer entered
+   358                              <1> ;	jnc		validIntegerInput
+   359                              <1> ;	Otherwise, an invalid integer was input
+   360                              <1> extern		InputSInt
+   361                              <1> 
+   362                              <1> ;Call the necessary interrupt with the necessary register values to read data from the keyboard
+   363                              <1> ;Stack Contents:
+   364                              <1> ;	Address of the string to print
+   365                              <1> ;	Address of keyboard buffer
+   366                              <1> ;	Size of the keyboard buffer
+   367                              <1> ;Return:
+   368                              <1> ;	Rax will contain the number of characters input
+   369                              <1> ;Example Usage:
+   370                              <1> ;	push	inputPromptVariable
+   371                              <1> ;	push	keyboardBufferVariable
+   372                              <1> ;	push	keyboardBufferVariable.len  ;This is the maximum size of the buffer
+   373                              <1> ;	call	ReadTextWPrompt
+   374                              <1> extern		ReadTextWPrompt
+   375                              <1> 
+   376                              <1> ;Print a Quad-word floating point number
+   377                              <1> ;Stack Contents:
+   378                              <1> ;	The number of fractional digits to print
+   379                              <1> ;	The floating point number to print
+   380                              <1> ;Return:
+   381                              <1> ;	None
+   382                              <1> ;Example Usage:
+   383                              <1> ;	push	numberToPrint
+   384                              <1> ;	push	[fractionalDigits]
+   385                              <1> ;	call	PrintQWFloat
+   386                              <1> extern		PrintQWFloat
+   387                              <1> 
+   388                              <1> ;Print a Double-word floating point number with scientific notation
+   389                              <1> ;This version uses the integer extraction power of the FPU instead of moving bits
+   390                              <1> ;	around to extract the exponent and left/right mantissa's making this a
+   391                              <1> ;	much easier and shorter algorithm
+   392                              <1> ;Stack Contents:
+   393                              <1> ;	The number of fractional digits to print
+   394                              <1> ;	The floating point number to print
+   395                              <1> ;Return:
+   396                              <1> ;	None
+   397                              <1> ;Example Usage:
+   398                              <1> ;	push	[numberToPrint]
+   399                              <1> ;	push	[fractionalDigits]
+   400                              <1> ;	call	PrintQWFloatSN
+   401                              <1> extern		PrintQWFloatSN
+   402                              <1> 
+   403                              <1> ;Input a Floating Point Number	
+   404                              <1> ;This function will let the user input a string, then it will check it to make sure it
+   405                              <1> ;is a valid floating point number.  It will then convert the ASCII string into a QWORD 
+   406                              <1> ;and return that value in the RAX register.
+   407                              <1> ;Stack Contents:
+   408                              <1> ;	None
+   409                              <1> ;Return: 	RAX and ST(0) will contain the number
+   410                              <1> ;			Carry flag will be set if invalid binary number was input
+   411                              <1> ;Example Usage:
+   412                              <1> ;	call	InputFloat
+   413                              <1> ;	jnc		ValidFloatLabel
+   414                              <1> ;	otherwise, a problem occured - print an error message
+   415                              <1> extern		InputFloat
+   416                              <1> 	
+   417                              <1> ;Input Binary Number
+   418                              <1> ;This function will let the user input a string, then it will check it to make sure it
+   419                              <1> ;is a binary string.  It will then convert the ASCII string into a DWORD and return
+   420                              <1> ;that value in the RAX register.
+   421                              <1> ;Stack Contents:
+   422                              <1> ;	None
+   423                              <1> ;Return: 	rax will contain the numeric binary value
+   424                              <1> ;			Carry flag will be set if invalid binary number was input
+   425                              <1> ;Example Usage:
+   426                              <1> ;	call	InputBin
+   427                              <1> ;	jnc		ValidBinLabel
+   428                              <1> ;	otherwise, a problem occured - print an error message
+   429                              <1> extern		InputBin
+   430                              <1> 
+   431                              <1> ;This function will let the user input a string, then it will check it to make sure it
+   432                              <1> ;is a hexidecimal string.  It will then convert the ASCII string into a DWORD and return
+   433                              <1> ;that value in the EAX register.
+   434                              <1> ;Stack Contents:
+   435                              <1> ;	None
+   436                              <1> ;Return: 	rax will contain the numeric hexidecimal value
+   437                              <1> ;			Carry flag will be set if invalid hex number was input
+   438                              <1> ;Example Usage:
+   439                              <1> ;	call	InputHex
+   440                              <1> ;	jnc		ValidHexLabel
+   441                              <1> ;	otherwise, a problem occured - print an error message
+   442                              <1> extern		InputHex
+   443                              <1> 
+   444                              <1> ;Allocate some memory (x bytes)	and return the high address to RAX
+   445                              <1> ;Stack Contents:
+   446                              <1> ;	Number of BYTES to add to memory
+   447                              <1> ;Return: 	RAX will contain the new high memory address
+   448                              <1> ;Example Usage:
+   449                              <1> ;	push	QWORD 1024			;increase memory by 1024 bytes
+   450                              <1> ;	call	AllocateBytes
+   451                              <1> extern		AllocateBytes
+   452                              <1> 
+   453                              <1> ;Free some memory (x bytes)	and return the high address to RAX
+   454                              <1> ;Stack Contents:
+   455                              <1> ;	Number of BYTES to remove from memory
+   456                              <1> ;Return: 	RAX will contain the new high memory address
+   457                              <1> ;Example Usage:
+   458                              <1> ;	push	QWORD 1024			;reduce memory by 1024 bytes
+   459                              <1> ;	call	FreeBytes
+   460                              <1> extern		FreeBytes
+   461                              <1> 
+   462                              <1> ;Print all of the floating point registers ST0 - ST7
+   463                              <1> ;Stack Contents:
+   464                              <1> ;	None
+   465                              <1> ;Return: 	None
+   466                              <1> ;Example Usage:
+   467                              <1> ;	call	PrintFloatingRegisters
+   468                              <1> extern		PrintFloatingRegisters
+   469                              <1> 
+   470                              <1> ;Print a 64-bit floating point number
+   471                              <1> ;Stack Contents:
+   472                              <1> ;	The floating point number
+   473                              <1> ;Return: 	None
+   474                              <1> ;Example Usage:
+   475                              <1> ;	call	Print64bitFloatBinary
+   476                              <1> extern		Print64bitFloatBinary
+   477                              <1> 
+   478                              <1> ;Set the carry flag if the floating poing number pushed onto the Stack
+   479                              <1> ;is a +NAN, -NAN, +Infinity or -Infinity
+   480                              <1> ;Stack Contents:
+   481                              <1> ;	QWORD Floating Point number (Stack)
+   482                              <1> ;Return: Carry Flag Set if NAN, Clear if OK
+   483                              <1> ;Example Usage
+   484                              <1> ;   push  QWORD [floatingVariable]
+   485                              <1> ;   call  IsNAN
+   486                              <1> extern		IsNAN
+   487                              <1> 
+   488                              <1> ;Simple xor encryption/decryption of a string using a user entered key
+   489                              <1> ;Stack Contents:
+   490                              <1> ;	String address to encrypt/decrypt (Stack rbp + 48)
+   491                              <1> ;	Length of the string to encrypt (Stack rbp + 40)
+   492                              <1> ;	string address to be used as a key (Stack rbp + 32)
+   493                              <1> ;	integer value indicating the length of the key (Stack rbp + 24)
+   494                              <1> ;	string address where the encrypted/decrypted data should go (Stack rbp + 16)
+   495                              <1> ;Return:	Total bytes encrypted in eax
+   496                              <1> ;Example Usage
+   497                              <1> ;   push	stringaddress
+   498                              <1> ;	push	lengthofstring
+   499                              <1> ;	push	keystringaddress
+   500                              <1> ;	push	lengthofkey
+   501                              <1> ;	push	resultaddress
+   502                              <1> ;   call  EncryptString
+   503                              <1> extern		EncryptString
+   504                              <1> 
+   505                              <1> ;Clears the keyboard buffer until \n or null are encountered
+   506                              <1> ;Stack contents:
+   507                              <1> ;	None
+   508                              <1> ;Example Usage:
+   509                              <1> ;	call	ClearKBuffer
+   510                              <1> extern		ClearKBuffer
+   511                              <1> 
+   512                              <1> ;An Internal function used to get the system time in hours
+   513                              <1> ;Stack Contents:
+   514                              <1> ;	None
+   515                              <1> ;Return: RAX will have the current Hour
+   516                              <1> ;Example Usage
+   517                              <1> ;	call	GetCurrentHour
+   518                              <1> extern		GetCurrentHour
+   519                              <1> 
+   520                              <1> ;An Internal function used to get the system time in minutes
+   521                              <1> ;Stack Contents:
+   522                              <1> ;	None
+   523                              <1> ;Return: RAX will have the current minute
+   524                              <1> ;Example Usage
+   525                              <1> ;	call	GetCurrentMinute
+   526                              <1> extern		GetCurrentMinute
+   527                              <1> 
+   528                              <1> ;An Internal function used to get the system time in seconds
+   529                              <1> ;Stack Contents:
+   530                              <1> ;	None
+   531                              <1> ;Return: RAX will have the current seconds
+   532                              <1> ;Example Usage
+   533                              <1> ;	call	GetCurrentSecond
+   534                              <1> extern		GetCurrentSecond
+   535                              <1> 
+   536                              <1> ;An Internal function used to get the system year
+   537                              <1> ;Stack Contents:
+   538                              <1> ;	None
+   539                              <1> ;Return: RAX will have the current year
+   540                              <1> ;Example Usage
+   541                              <1> ;	call	GetCurrentYear
+   542                              <1> extern		GetCurrentYear
+   543                              <1> 
+   544                              <1> ;An Internal function used to get the system month
+   545                              <1> ;Stack Contents:
+   546                              <1> ;	None
+   547                              <1> ;Return: RAX will have the current month
+   548                              <1> ;Example Usage
+   549                              <1> ;	call	GetCurrentMonth
+   550                              <1> extern		GetCurrentMonth
+   551                              <1> 
+   552                              <1> ;An Internal function used to get the system day
+   553                              <1> ;Stack Contents:
+   554                              <1> ;	None
+   555                              <1> ;Return: RAX will have the current day
+   556                              <1> ;Example Usage
+   557                              <1> ;	call	GetCurrentDay
+   558                              <1> extern		GetCurrentDay
+   559                              <1> 
+   560                              <1> ;An Internal function used to get the system time hours, minutes, seconds
+   561                              <1> ;Stack Contents:
+   562                              <1> ;	None
+   563                              <1> ;Return: None
+   564                              <1> ;Example Usage
+   565                              <1> ;   call GetSystemTime
+   566                              <1> extern		GetSystemTime
+   567                              <1> 
+   568                              <1> ;Print the time in the format hh:mm:ss
+   569                              <1> ;Stack Contents:
+   570                              <1> ;	None
+   571                              <1> ;Return: None
+   572                              <1> ;Example Usage
+   573                              <1> ;   call PrintSystemTime
+   574                              <1> extern		PrintSystemTime
+   575                              <1> 
+   576                              <1> ;Print the date in the format mm/dd/yyyy
+   577                              <1> ;Stack Contents:
+   578                              <1> ;	None
+   579                              <1> ;Return: None
+   580                              <1> ;Example Usage
+   581                              <1> ;   call PrintSystemDateEng
+   582                              <1> extern		PrintSystemDateEng
+   583                              <1> 
+   584                              <1> ;Print the date in the format yyyy/mm/dd
+   585                              <1> ;Stack Contents:
+   586                              <1> ;	None
+   587                              <1> ;Return: None
+   588                              <1> ;Example Usage
+   589                              <1> ;   call PrintSystemDateEuro
+   590                              <1> extern		PrintSystemDateEuro
+   591                              <1> 
+   592                              <1> ;Convert and then return in a byte array a64-but number in decimal format
+   593                              <1> ;Stack contents:
+   594                              <1> ;	Value to Convert to an Ascii String
+   595                              <1> ;	Address of byte array to contain the result
+   596                              <1> ;Return Value:
+   597                              <1> ;	rax = Number of characters returned
+   598                              <1> ;Example Usage:
+   599                              <1> ;	push 	QWORD [quadwordvariable]
+   600                              <1> ;	push 	stringbuffer
+   601                              <1> ;	call	ToString64bitNumDecimal
+   602                              <1> extern		ToString64bitNumDecimal
+   603                              <1> 
+   604                              <1> ;Convert and then return in a byte array a 64bit signed number in decimal format
+   605                              <1> ;Stack contents:
+   606                              <1> ;	Value to Convert to an Ascii String
+   607                              <1> ;	Address of byte array to contain the result
+   608                              <1> ;Return Value:
+   609                              <1> ;	rax = Number of characters returned
+   610                              <1> ;Example Usage:
+   611                              <1> ;	push 	QWORD [quadwordvariable]
+   612                              <1> ;	push 	stringbuffer
+   613                              <1> ;	call	ToString64bitSNumDecimal
+   614                              <1> extern		ToString64bitSNumDecimal
+   615                              <1> 
+   616                              <1> ;Get the system date in English format and return to the calling function in th array
+   617                              <1> ;	provided
+   618                              <1> ;Stack contents:
+   619                              <1> ;	Address of byte array to contain the result
+   620                              <1> ;Return Value:
+   621                              <1> ;	rax = Number of characters returned
+   622                              <1> ;Example Usage:
+   623                              <1> ;	push 	stringbuffer
+   624                              <1> ;	call	GetEngDateString
+   625                              <1> extern		GetEngDateString
+   626                              <1> 
+   627                              <1> ;Get the system date in European format and return to the calling function in th array
+   628                              <1> ;	provided
+   629                              <1> ;Stack contents:
+   630                              <1> ;	Address of byte array to contain the result
+   631                              <1> ;Return Value:
+   632                              <1> ;	rax = Number of characters returned
+   633                              <1> ;Example Usage:
+   634                              <1> ;	push 	stringbuffer
+   635                              <1> ;	call	GetEuroDateString
+   636                              <1> extern		GetEuroDateString
+   637                              <1> 
+   638                              <1> ;Get the system time and return to the calling function in th array
+   639                              <1> ;	provided
+   640                              <1> ;Stack contents:
+   641                              <1> ;	Address of byte array to contain the result
+   642                              <1> ;Return Value:
+   643                              <1> ;	rax = Number of characters returned
+   644                              <1> ;Example Usage:
+   645                              <1> ;	push 	stringbuffer
+   646                              <1> ;	call	GetTimeString
+   647                              <1> extern		GetTimeString
+   648                              <1> 
+   649                              <1> 
+   650                              <1> ;Get a random number from the CPU
+   651                              <1> ;Stack contents:
+   652                              <1> ;	The maximum value of the random number
+   653                              <1> ;	Signed = 1, Unsigned = 0
+   654                              <1> ;Return Value:
+   655                              <1> ;	rax = Random number value
+   656                              <1> ;Example Usage:
+   657                              <1> ;	push 	QWORD 200			;Will create a random number no greater than 200
+   658                              <1> ;	push	QWORD 1				;1 = signed, 0 = uinsigned
+   659                              <1> ;	call	GetRandomInt
+   660                              <1> extern		GetRandomInt
+   661                              <1> 
+   662                              <1> ;Calculate the Variance from an array of numbers returning an integer result
+   663                              <1> ;Stack contents:
+   664                              <1> ;	Address of sample array of Quad words
+   665                              <1> ;	The number of samples to process
+   666                              <1> ;Return Value:
+   667                              <1> ;	rax = Calculated Variance
+   668                              <1> ;Example Usage:
+   669                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   670                              <1> ;	push	10					;process 10 of the numbers in the array
+   671                              <1> ;	call	CalcVariance
+   672                              <1> extern		CalcVariance
+   673                              <1> 
+   674                              <1> 
+   675                              <1> ;Calculate the Variance from an array of numbers returning a floating point number
+   676                              <1> ;Stack contents:
+   677                              <1> ;	Address of sample array of Quad words
+   678                              <1> ;	The number of samples to process
+   679                              <1> ;Return Value:
+   680                              <1> ;	rax = Calculated Variance
+   681                              <1> ;Example Usage:
+   682                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   683                              <1> ;	push	10					;process 10 of the numbers in the array
+   684                              <1> ;	call	CalcVariance
+   685                              <1> extern		CalcVarianceFloat
+   686                              <1> 
+   687                              <1> ;Calculate the Standard Deviation from an array of numbers
+   688                              <1> ;Stack contents:
+   689                              <1> ;	Address of sample array of Quad words
+   690                              <1> ;	The number of samples to process
+   691                              <1> ;Return Value:
+   692                              <1> ;	rax = Calculated Standard Deviation
+   693                              <1> ;Example Usage:
+   694                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   695                              <1> ;	push	10					;process 10 of the numbers in the array
+   696                              <1> ;	call	CalcStdDev
+   697                              <1> extern		CalcStdDev
+   698                              <1> 
+   699                              <1> ;Calculate the Mean from an array of numbers
+   700                              <1> ;Stack contents:
+   701                              <1> ;	Address of sample array of Quad words
+   702                              <1> ;	The number of samples to process
+   703                              <1> ;Return Value:
+   704                              <1> ;	rax = Calculated Mean
+   705                              <1> ;Example Usage:
+   706                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   707                              <1> ;	push	10					;process 10 of the numbers in the array
+   708                              <1> ;	call	CalcMean
+   709                              <1> extern		CalcMean
+   710                              <1> 
+   711                              <1> ;Fills an array with random quad values
+   712                              <1> ;Stack contents:
+   713                              <1> ;	Address of array of Quad words
+   714                              <1> ;	The number of samples to process
+   715                              <1> ;	Maximum value of the random number(s)
+   716                              <1> ;	Signed = 1, Unsigned = 0
+   717                              <1> ;Return Value:
+   718                              <1> ;	Nothing
+   719                              <1> ;Example Usage:
+   720                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   721                              <1> ;	push	10					;process 10 of the numbers in the array
+   722                              <1> ;	push	500					;The maximum random value should be 500
+   723                              <1> ;	push	0					;Unsigned only
+   724                              <1> ;	call	RandomArray
+   725                              <1> extern		RandomArray
+   726                              <1> 
+   727                              <1> ;Calculate the sum from an array of numbers
+   728                              <1> ;Stack contents:
+   729                              <1> ;	Address of sample array of Quad words
+   730                              <1> ;	The number of samples to process
+   731                              <1> ;Return Value:
+   732                              <1> ;	rax = Calculated Sum
+   733                              <1> ;Example Usage:
+   734                              <1> ;	push 	sampleArray			;Address of the array of numeric samples
+   735                              <1> ;	push	10					;process 10 of the numbers in the array
+   736                              <1> ;	call	CalcSumArray
+   737                              <1> extern		CalcSumArray
+   738                              <1> 
+   739                              <1> ;Calculate the GCD of two numbers passed to this function
+   740                              <1> ;Stack contents:
+   741                              <1> ;	Integer #1
+   742                              <1> ;	Integer #2
+   743                              <1> ;Return Value:
+   744                              <1> ;	rax = Calculated Greatest Common Denominator
+   745                              <1> ;Example Usage:
+   746                              <1> ;	push 	15					;Our first number
+   747                              <1> ;	push	5					;Our second number
+   748                              <1> ;	call	CalcGCD
+   749                              <1> extern		CalcGCD
+   750                              <1> 
+   751                              <1> ;Calculate the factorial of a number passed to this function
+   752                              <1> ;Stack contents:
+   753                              <1> ;	Integer number to factor
+   754                              <1> ;Return Value:
+   755                              <1> ;	rax = Calculated Factorial of the argument passed in
+   756                              <1> ;Example Usage:
+   757                              <1> ;	push 	15				;The number fo factor - 15 in this case
+   758                              <1> ;	call	CalcFactorial
+   759                              <1> extern		CalcFactorial
+   760                              <1> 
+   761                              <1> ;Calculate the factorial of a number passed to this function
+   762                              <1> ;Stack contents:
+   763                              <1> ;	Integer number to factor
+   764                              <1> ;Return Value:
+   765                              <1> ;	rax = Calculated Factorial of the argument passed in floating point format
+   766                              <1> ;Example Usage:
+   767                              <1> ;	push 	15				;The number fo factor - 15 in this case
+   768                              <1> ;	call	CalcFactorialFloat
+   769                              <1> extern		CalcFactorialFloat
+   770                              <1> 
+     2                                  
+     3                                  ;SECTION macros
+     4                                  %macro	setupFrame 0
+     5                                  		push 	rbp									;save existing main pointer
+     6                                  		mov 	rbp, rsp							;switch to local function pointer
+     7                                  %endmacro
+     8                                  %macro	closeFrame 0
+     9                                  		mov		rsp, rbp							;set pointer back
+    10                                  		pop		rbp									;restore pointer
+    11                                  %endmacro
+    12                                  %macro	file	4									;file	open, read, [rsp+16], 0, [inputFD]
+    13                                  		mov		rax, %1								;call value
+    14                                  		mov		rdx, %2								;access mode
+    15                                  		mov		rdi, %3								;address of file
+    16                                  		mov		rsi, %4								;file security flag: none				
+    17                                  		syscall										;call the kernel		
+    18                                  %endmacro
+    19                                  %macro	file	3									;file [inputFD], bytes, mode
+    20                                  		mov		rdi, %1								;file handler
+    21                                  		mov		rdx, %2								;bytes to write
+    22                                  		mov		rax, %3								;write mode						
+    23                                  		syscall										;call the kernel	
+    24                                  %endmacro
+    25                                  %macro	alloc	2
+    26                                  		mov		rdi, %1								;copy current limit
+    27                                  		add		rdi, %2								;size requested
+    28                                  		mov		rax, sys_brk						;sys_brk
+    29                                  		syscall										;rax now has new high limit.
+    30                                  %endmacro	
+    31                                  %macro	msg	1
+    32                                  		push	%1									;address of message
+    33                                  		call	PrintString							;print message
+    34                                  		call	Printendl							;print new line
+    35                                  %endmacro
+    36                                  %macro  saveRegisters 0
+    37                                          push	rax
+    38                                          push	rbx
+    39                                          push	rcx
+    40                                          push	rdx
+    41                                  		push	rsi
+    42                                  		push	rdi
+    43                                  		push	r8
+    44                                  		push	r9
+    45                                  		push	r10
+    46                                  		push	r11
+    47                                  		push	r12
+    48                                  		push	r13
+    49                                  		push	r14
+    50                                  		push	r15
+    51                                  %endmacro
+    52                                  %macro  restoreRegisters 0
+    53                                  		pop		r15
+    54                                  		pop		r14
+    55                                  		pop		r13
+    56                                  		pop		r12
+    57                                  		pop		r11
+    58                                  		pop		r10
+    59                                  		pop		r9
+    60                                  		pop		r8
+    61                                          pop		rdi
+    62                                          pop		rsi
+    63                                          pop		rdx
+    64                                          pop		rcx
+    65                                  		pop		rbx
+    66                                  		pop		rax
+    67                                  %endmacro
+    68                                  
+    69                                  
+    70                                  SECTION .data
+    71 00000000 57656C636F6D652074-     	welcomeDisplay		db	"Welcome to my Program", 0h
+    71 00000009 6F206D792050726F67-
+    71 00000012 72616D00           
+    72 00000016 50726F6772616D2065-     	closeDisplay		db	"Program ending, have a nice day", 0h
+    72 0000001F 6E64696E672C206861-
+    72 00000028 76652061206E696365-
+    72 00000031 2064617900         
+    73 00000036 4552524F523A207477-     	argError			db	"ERROR: two arguments required. ex: ./main sourcefile destfile", 0h
+    73 0000003F 6F20617267756D656E-
+    73 00000048 747320726571756972-
+    73 00000051 65642E2065783A202E-
+    73 0000005A 2F6D61696E20736F75-
+    73 00000063 72636566696C652064-
+    73 0000006C 65737466696C6500   
+    74 00000074 4552524F523A20756E-     	sourceError			db  "ERROR: unable to open source file", 0h
+    74 0000007D 61626C6520746F206F-
+    74 00000086 70656E20736F757263-
+    74 0000008F 652066696C6500     
+    75 00000096 4552524F523A20756E-     	destError			db  "ERROR: unable to open destination file", 0h	
+    75 0000009F 61626C6520746F206F-
+    75 000000A8 70656E206465737469-
+    75 000000B1 6E6174696F6E206669-
+    75 000000BA 6C6500             
+    76 000000BD 4552524F523A20756E-     	readError			db  "ERROR: unable to read file", 0h
+    76 000000C6 61626C6520746F2072-
+    76 000000CF 6561642066696C6500 
+    77 000000D8 4552524F523A20756E-     	writeError			db  "ERROR: unable to write file", 0h
+    77 000000E1 61626C6520746F2077-
+    77 000000EA 726974652066696C65-
+    77 000000F3 00                 
+    78 000000F4 436F70696E6720736F-     	copyDisplay			db	"Coping source file to destination file", 0h
+    78 000000FD 757263652066696C65-
+    78 00000106 20746F206465737469-
+    78 0000010F 6E6174696F6E206669-
+    78 00000118 6C6500             
+    79 0000011B 506C6561736520656E-     	keyPrompt	 		db  "Please enter a key for encrypting", 0h	
+    79 00000124 7465722061206B6579-
+    79 0000012D 20666F7220656E6372-
+    79 00000136 797074696E6700     
+    80 0000013D 546F74616C20627974-     	bytesWritten		db	"Total bytes written", 0h
+    80 00000146 657320777269747465-
+    80 0000014F 6E00               
+    81                                  	QWORDSIZE			equ 8
+    82                                  	sys_read			equ 0
+    83                                  	sys_write			equ 1
+    84                                  	sys_create			equ 85
+    85                                  	sys_new				equ	0
+    86                                  	sys_open			equ 2
+    87                                  	sys_close			equ 3
+    88                                  	sys_brk				equ 0ch
+    89                                  	bufferSize			equ 0ffffh	
+    90                                  
+    91                                  SECTION .bss
+    92 00000000 ????????????????        	inputFD				resq	1	
+    93 00000008 ????????????????        	outputFD			resq	1	
+    94 00000010 ????????????????        	originalBreak		resq	1
+    95 00000018 <res FFh>               	userKey				resb	255
+    96                                  						.length equ($ - userKey)
+    97                                  
+    98                                  SECTION .text
+    99                                  	global  _start
+   100                                  
+   101                                  _start:
+   102 00000000 90                      nop
+   103                                      welcome:	msg		welcomeDisplay										;print message
+   103                              <1>  welcome: 
+    32 00000001 68[00000000]        <1>  push %1
+    33 00000006 E8(00000000)        <1>  call PrintString
+    34 0000000B E8(00000000)        <1>  call Printendl
+   104                                      
+   105 00000010 48833C2403              	arguments:	cmp		QWORD[rsp], 3										;compare arguments
+   106 00000015 7414                    				je		input												;rsp < 3
+   107                                  				msg		argError											;display error
+    32 00000017 68[36000000]        <1>  push %1
+    33 0000001C E8(00000000)        <1>  call PrintString
+    34 00000021 E8(00000000)        <1>  call Printendl
+   108 00000026 E98B010000              				jmp		exit												;exit function	
+   109                                  	
+   110                                  	input:		file	sys_open, sys_read, [rsp+16], 0						;syscall|mode|filename|permission macro
+   110                              <1>  input: 
+    13 0000002B B802000000          <1>  mov rax, %1
+    14 00000030 BA00000000          <1>  mov rdx, %2
+    15 00000035 488B7C2410          <1>  mov rdi, %3
+    16 0000003A BE00000000          <1>  mov rsi, %4
+    17 0000003F 0F05                <1>  syscall
+   111 00000041 4883F800                				cmp		rax, 0												;check return from kernel
+   112 00000045 7D14                    				jge		inputOk												;rax < 0
+   113                                  				msg		sourceError											;display error
+    32 00000047 68[74000000]        <1>  push %1
+    33 0000004C E8(00000000)        <1>  call PrintString
+    34 00000051 E8(00000000)        <1>  call Printendl
+   114 00000056 E95B010000              				jmp		exit												;exit function
+   115                                  	
+   116 0000005B 48890425[00000000]      	inputOk:	mov		[inputFD], rax										;ok to copy to file descriptor
+   117                                  	
+   118                                  	output:		file	sys_create, sys_new, [rsp+24], 0644o				;syscall|mode|filename|permission macro
+   118                              <1>  output: 
+    13 00000063 B855000000          <1>  mov rax, %1
+    14 00000068 BA00000000          <1>  mov rdx, %2
+    15 0000006D 488B7C2418          <1>  mov rdi, %3
+    16 00000072 BEA4010000          <1>  mov rsi, %4
+    17 00000077 0F05                <1>  syscall
+   119 00000079 4883F800                				cmp		rax, 0												;check return from kernel
+   120 0000007D 7D14                    				jge		outputOk											;rax < 0	
+   121                                  				msg		destError											;display error
+    32 0000007F 68[96000000]        <1>  push %1
+    33 00000084 E8(00000000)        <1>  call PrintString
+    34 00000089 E8(00000000)        <1>  call Printendl
+   122 0000008E E923010000              				jmp		exit												;exit function
+   123                                  	
+   124 00000093 48890425[08000000]      	outputOk:	mov		[outputFD], rax										;ok to copy to file descriptor			
+   125                                  					
+   126                                  	getKey:		msg		keyPrompt											;prompt user for key
+   126                              <1>  getKey: 
+    32 0000009B 68[1B010000]        <1>  push %1
+    33 000000A0 E8(00000000)        <1>  call PrintString
+    34 000000A5 E8(00000000)        <1>  call Printendl
+   127 000000AA 68[18000000]            				push	userKey												;save characters from readText to here
+   128 000000AF 68FF000000              				push	userKey.length										;max buffer size for readText
+   129 000000B4 E8(00000000)            				call	ReadText											;get user input, (like cin in c++)
+   130 000000B9 48FFC8                  				dec 	rax													;skip enter
+   131 000000BC 4989C1                  				mov		r9, rax												;save key length
+   132                                  
+   133                                  	verbose:	msg		copyDisplay											;display message
+   133                              <1>  verbose: 
+    32 000000BF 68[F4000000]        <1>  push %1
+    33 000000C4 E8(00000000)        <1>  call PrintString
+    34 000000C9 E8(00000000)        <1>  call Printendl
+   134                                  	
+   135                                  	heap:		alloc	0, 0											;get current program memory address
+   135                              <1>  heap: 
+    26 000000CE BF00000000          <1>  mov rdi, %1
+    27 000000D3 4883C700            <1>  add rdi, %2
+    28 000000D7 B80C000000          <1>  mov rax, sys_brk
+    29 000000DC 0F05                <1>  syscall
+   136 000000DE 48890425[10000000]      				mov		[originalBreak], rax								;save address for deallocation
+   137 000000E6 4889C6                  				mov		rsi, rax											;save address for buffer
+   138                                  				
+   139                                  				alloc	rax, bufferSize									;create new buffer
+    26 000000E9 4889C7              <1>  mov rdi, %1
+    27 000000EC 4881C7FFFF0000      <1>  add rdi, %2
+    28 000000F3 B80C000000          <1>  mov rax, sys_brk
+    29 000000F8 0F05                <1>  syscall
+   140                                  				
+   141 000000FA 4D29ED                  	totalBytes:	sub		r13, r13											;total bytes written
+   142                                  	
+   143                                  	readBytes:	file 	[inputFD], bufferSize, sys_read						;fd|bytes|mode macro
+   143                              <1>  readBytes: 
+    20 000000FD 488B3C25[00000000]  <1>  mov rdi, %1
+    21 00000105 BAFFFF0000          <1>  mov rdx, %2
+    22 0000010A B800000000          <1>  mov rax, %3
+    23 0000010F 0F05                <1>  syscall
+   144 00000111 4883F800                				cmp		rax, 0												;check return from kernel
+   145 00000115 7D11                    				jge		readOk												;rax < 0	
+   146                                  				msg		readError											;display error
+    32 00000117 68[BD000000]        <1>  push %1
+    33 0000011C E8(00000000)        <1>  call PrintString
+    34 00000121 E8(00000000)        <1>  call Printendl
+   147 00000126 EB7F                    				jmp		delete												;delete memory and exit function
+   148                                  	
+   149 00000128 4989C0                  	readOk:		mov 	r8, rax												;save bytes read
+   150                                  	
+   151 0000012B 56                      	xorBytes:	push	rsi													;buffer address
+   152 0000012C 4150                    				push	r8													;buffer size
+   153 0000012E 68[18000000]            				push	userKey												;key address
+   154 00000133 4151                    				push	r9													;key length
+   155 00000135 E897000000              				call	EncryptMe											;encrypt/decrypt
+   156                                  
+   157                                  	writeBytes:	file 	[outputFD], r8, sys_write							;fd|bytes|mode macro
+   157                              <1>  writeBytes: 
+    20 0000013A 488B3C25[08000000]  <1>  mov rdi, %1
+    21 00000142 4C89C2              <1>  mov rdx, %2
+    22 00000145 B801000000          <1>  mov rax, %3
+    23 0000014A 0F05                <1>  syscall
+   158 0000014C 4883F800                				cmp		rax, 0												;check return from kernel
+   159 00000150 7D11                    				jge		writeOk												;rax < 0	
+   160                                  				msg		writeError											;display error
+    32 00000152 68[D8000000]        <1>  push %1
+    33 00000157 E8(00000000)        <1>  call PrintString
+    34 0000015C E8(00000000)        <1>  call Printendl
+   161 00000161 EB44                    				jmp		delete												;delete memory and exit function
+   162                                  
+   163 00000163 4901C5                  	writeOk:	add 	r13, rax											;accumulate bytes written	
+   164                                  
+   165                                  				
+   166 00000166 483DFFFF0000            	loopCheck:	cmp		rax, bufferSize										;check bytes written
+   167 0000016C 748F                    				je		readBytes											;loop if equal to buffer
+   168                                  
+   169 0000016E B803000000              	close:		mov		rax, sys_close										;sys_close
+   170 00000173 488B3C25[00000000]      				mov 	rdi, [inputFD]										;file descriptor
+   171 0000017B 0F05                    				syscall														;call kernel
+   172                                  				
+   173 0000017D B803000000              				mov		rax, sys_close										;sys_close
+   174 00000182 488B3C25[08000000]      				mov 	rdi, [outputFD]										;file descriptor
+   175 0000018A 0F05                    				syscall														;call kernel
+   176                                  			
+   177                                  	result:		msg		bytesWritten							;display total bytes message
+   177                              <1>  result: 
+    32 0000018C 68[3D010000]        <1>  push %1
+    33 00000191 E8(00000000)        <1>  call PrintString
+    34 00000196 E8(00000000)        <1>  call Printendl
+   178 0000019B 4155                    				push	r13										;total bytes value address
+   179 0000019D E8(00000000)            				call	Print64bitSNumDecimal					;display total bytes
+   180 000001A2 E8(00000000)            				call	Printendl								;print new line
+   181                                  
+   182 000001A7 B80C000000              	delete:		mov		rax, sys_brk								;sys_brk
+   183 000001AC 488B3C25[10000000]      				mov 	rdi, [originalBreak]					;restore original memory limit
+   184 000001B4 0F05                    				syscall											;call kernel
+   185                                  
+   186                                  	exit:		msg		closeDisplay										;print message
+   186                              <1>  exit: 
+    32 000001B6 68[16000000]        <1>  push %1
+    33 000001BB E8(00000000)        <1>  call PrintString
+    34 000001C0 E8(00000000)        <1>  call Printendl
+   187 000001C5 B83C000000              				mov		rax, 60												;60 = system exit
+   188 000001CA BF00000000              				mov		rdi, 0												;0 = return code
+   189 000001CF 0F05                    				syscall														;Poke the kernel
+   190                                  
+   191                                  			
+   192                                  EncryptMe:	setupFrame														;setup stack
+   192                              <1> EncryptMe: 
+     5 000001D1 55                  <1>  push rbp
+     6 000001D2 4889E5              <1>  mov rbp, rsp
+   193                                  			saveRegisters														;save registers
+    37 000001D5 50                  <1>  push rax
+    38 000001D6 53                  <1>  push rbx
+    39 000001D7 51                  <1>  push rcx
+    40 000001D8 52                  <1>  push rdx
+    41 000001D9 56                  <1>  push rsi
+    42 000001DA 57                  <1>  push rdi
+    43 000001DB 4150                <1>  push r8
+    44 000001DD 4151                <1>  push r9
+    45 000001DF 4152                <1>  push r10
+    46 000001E1 4153                <1>  push r11
+    47 000001E3 4154                <1>  push r12
+    48 000001E5 4155                <1>  push r13
+    49 000001E7 4156                <1>  push r14
+    50 000001E9 4157                <1>  push r15
+   194 000001EB 4829DB                  			sub 	rbx, rbx												;temp key storage
+   195 000001EE 4829C9                  			sub 	rcx, rcx												;buffer index
+   196 000001F1 488B7528                			mov 	rsi, QWORD[rbp+QWORDSIZE*5]								;buffer address									
+   197 000001F5 4C8B6D18                			mov 	r13, QWORD[rbp+QWORDSIZE*3]								;key address
+   198                                  
+   199 000001F9 4829C0                  			keyLimit:	sub		rax, rax									;key index
+   200 000001FC 483B4510                			encrypt:	cmp 	rax, QWORD[rbp+QWORDSIZE*2]					;compare key index and length
+   201 00000200 74F7                    						je		keyLimit									;if index = length
+   202                                  
+   203 00000202 418A5C0500              						mov 	bl, [r13+rax]								;move a key to register
+   204 00000207 301C0E                  						xor 	BYTE[rsi+rcx], bl							;xor with byte in buffer
+   205 0000020A 48FFC0                  						inc 	rax											;increment key index
+   206 0000020D 48FFC1                  						inc 	rcx											;increment buffer index
+   207 00000210 483B4D20                						cmp 	rcx, QWORD[rbp+QWORDSIZE*4]					;compare buffer index and length/size
+   208 00000214 7CE6                    						jl 		encrypt										;if index < length
+   209                                  	
+   210                                  			restoreRegisters												;restore registers
+    53 00000216 415F                <1>  pop r15
+    54 00000218 415E                <1>  pop r14
+    55 0000021A 415D                <1>  pop r13
+    56 0000021C 415C                <1>  pop r12
+    57 0000021E 415B                <1>  pop r11
+    58 00000220 415A                <1>  pop r10
+    59 00000222 4159                <1>  pop r9
+    60 00000224 4158                <1>  pop r8
+    61 00000226 5F                  <1>  pop rdi
+    62 00000227 5E                  <1>  pop rsi
+    63 00000228 5A                  <1>  pop rdx
+    64 00000229 59                  <1>  pop rcx
+    65 0000022A 5B                  <1>  pop rbx
+    66 0000022B 58                  <1>  pop rax
+   211                                  			closeFrame														;close stack
+     9 0000022C 4889EC              <1>  mov rsp, rbp
+    10 0000022F 5D                  <1>  pop rbp
+   212 00000230 C22000                  			ret 32
